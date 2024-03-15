@@ -10,11 +10,11 @@ public class Square
     {
         this.location = location;
         this.color = color;
-        instance = instantiater.createSquare(this);
+        instance = instantiater.CreateSquare(this);
     }
 
     public void destroySquare(Instantiater instantiater)
     {
-        instantiater.destroySquare(this);
+        instantiater.DestroySquare(this);
     }
 }

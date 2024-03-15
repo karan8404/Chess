@@ -15,15 +15,15 @@ public class Board
         this.instantiater = instantiater;
     }
 
-    public void startGame()
+    public void StartGame()
     {
-        FenUtility.createBoard(FenUtility.startingPosition, this, instantiater);
+        FenUtility.CreateBoard(FenUtility.startingPosition, this, instantiater);
     }
 
-    public bool movePiece(Piece piece, Move move)
+    public bool MovePiece(Piece piece, Move move)
     {
-        Piece captured=getPiece(move.end);
-        if(piece.color == captured.color)
+        Piece captured = GetPiece(move.end);
+        if (piece.color == captured.color)
             return false;
 
         //unity instance handling
@@ -31,15 +31,15 @@ public class Board
         piece.movePiece(move);
 
         //modifying array
-        pieces[move.start.x,move.start.y]=new Piece(move.start);
-        pieces[move.end.x,move.end.y]=piece;
+        pieces[move.start.x, move.start.y] = new Piece(move.start);
+        pieces[move.end.x, move.end.y] = piece;
 
-        
+
         return true;
     }
 
-    public Piece getPiece(Vector2Int location)
+    public Piece GetPiece(Vector2Int location)
     {
-        return pieces[location.x,location.y];
+        return pieces[location.x, location.y];
     }
 }

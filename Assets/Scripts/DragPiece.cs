@@ -21,28 +21,31 @@ public class DragPiece : MonoBehaviour
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         mousePos.x += 3.5f;
         mousePos.y += 3.5f;
-        Vector2Int boardPos = Utils.v2int(Mathf.RoundToInt(mousePos.x), Mathf.RoundToInt(mousePos.y));
+        Vector2Int boardPos = Utils.V2int(Mathf.RoundToInt(mousePos.x), Mathf.RoundToInt(mousePos.y));
 
-        if (Input.GetMouseButtonDown(0) && Utils.isPosOnBoard(boardPos))
+        if (Input.GetMouseButtonDown(0) && Utils.IsPosOnBoard(boardPos))
         {
-            pickedPiece = game.board.getPiece(boardPos);
-            if (!pickedPiece.hasPiece){
-                pickedPiece=getDummyPiece();
+            pickedPiece = game.board.GetPiece(boardPos);
+            if (!pickedPiece.hasPiece)
+            {
+                pickedPiece = getDummyPiece();
             }
 
             originalPos = boardPos;
-            Debug.Log(pickedPiece.color+" "+pickedPiece.type+"  "+originalPos);
+            Debug.Log(pickedPiece.color + " " + pickedPiece.type + "  " + originalPos);
         }
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
-            
+
         }
     }
 
     private Piece getDummyPiece()
     {
-        dummy=new Piece(Utils.v2int(-5, -5));
-        dummy.instance=new GameObject();
+        dummy = new Piece(Utils.V2int(-5, -5))
+        {
+            instance = new GameObject()
+        };
         return dummy;
     }
 }

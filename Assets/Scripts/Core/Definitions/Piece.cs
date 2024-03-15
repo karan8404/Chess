@@ -13,7 +13,7 @@ public class Piece
         this.location = location;
         this.type = type;
         this.color = color;
-        this.instance = instantiater.createPiece(this);
+        this.instance = instantiater.CreatePiece(this);
     }
 
     public Piece(Vector2Int location)
@@ -27,7 +27,7 @@ public class Piece
         if (this != move.piece)
             return false;
 
-        if (!Utils.isPosOnBoard(move.end))
+        if (!Utils.IsPosOnBoard(move.end))
             return false;
 
         setPos(move.end);
@@ -37,7 +37,7 @@ public class Piece
     public void setPos(Vector2 pos)
     {
         instance.transform.position = pos;
-        location = Utils.v2int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+        location = Utils.V2int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
     }
 
     public void destroyPiece(Instantiater instantiater)
@@ -45,6 +45,6 @@ public class Piece
         if (!hasPiece)
             return;
         hasPiece = false;
-        instantiater.destroyPiece(this);
+        instantiater.DestroyPiece(this);
     }
 }

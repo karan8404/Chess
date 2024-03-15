@@ -10,7 +10,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        board=new Board(instantiater);
-        board.startGame();
+        board = new Board(instantiater);
+        board.StartGame();
     }
 }

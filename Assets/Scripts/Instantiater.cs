@@ -11,27 +11,27 @@ public class Instantiater : MonoBehaviour
     public GameObject[] squarePrefabs;
     public GameObject moveIndicatorPrefab;
 
-    public GameObject createPiece(Piece piece)
+    public GameObject CreatePiece(Piece piece)
     {
-        return Instantiate(piecePrefabs[((int)piece.color * 6) + (int)piece.type], v2IntTov3(piece.location), Quaternion.identity, pieceContainer.transform);
+        return Instantiate(piecePrefabs[((int)piece.color * 6) + (int)piece.type], V2IntTov3(piece.location), Quaternion.identity, pieceContainer.transform);
     }
 
-    public void destroyPiece(Piece piece)
+    public void DestroyPiece(Piece piece)
     {
         Destroy(piece.instance);
     }
 
-    public GameObject createSquare(Square square)
+    public GameObject CreateSquare(Square square)
     {
-        return Instantiate(squarePrefabs[(int)square.color], v2IntTov3(square.location), Quaternion.identity, squareContainer.transform);
+        return Instantiate(squarePrefabs[(int)square.color], V2IntTov3(square.location), Quaternion.identity, squareContainer.transform);
     }
 
-    public void destroySquare(Square square)
+    public void DestroySquare(Square square)
     {
         Destroy(square.instance);
     }
 
-    public Vector3 v2IntTov3(Vector2Int v2)
+    public Vector3 V2IntTov3(Vector2Int v2)
     {
         return (ChessBoard.transform.position + new Vector3(v2.x, v2.y, 0));
     }

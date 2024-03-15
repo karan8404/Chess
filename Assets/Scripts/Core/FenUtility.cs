@@ -5,7 +5,7 @@ public static class FenUtility
 {
     public static string startingPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
-    public static void createBoard(string fen, Board board, Instantiater instantiater)
+    public static void CreateBoard(string fen, Board board, Instantiater instantiater)
     {
         int row, column;
         //creating squares first
@@ -13,7 +13,7 @@ public static class FenUtility
         {
             for (column = 0; column < 8; column++)
             {
-                board.squares[column, row] = new Square(Utils.v2int(column, row), (Color)((row + column + 1) % 2), instantiater);
+                board.squares[column, row] = new Square(Utils.V2int(column, row), (Color)((row + column + 1) % 2), instantiater);
             }
         }
 
@@ -25,7 +25,7 @@ public static class FenUtility
             {
                 int count = (int)char.GetNumericValue(c);
                 while (count-- > 0)
-                    board.pieces[column++, row] = new Piece(Utils.v2int(column, row));
+                    board.pieces[column++, row] = new Piece(Utils.V2int(column, row));
 
             }
             else if (char.IsLetter(c))
@@ -34,12 +34,12 @@ public static class FenUtility
                 Color color;
                 charPiece(c, out type, out color);
 
-                board.pieces[column, row] = new Piece(Utils.v2int(column, row), type, color, instantiater);
-                column = column + 1;
+                board.pieces[column, row] = new Piece(Utils.V2int(column, row), type, color, instantiater);
+                column++;
             }
             else if (c == '/')
             {
-                row = row - 1;
+                row--;
                 column = 0;
             }
         }
@@ -53,29 +53,15 @@ public static class FenUtility
         else
             color = Color.Black;
 
-        switch (char.ToLower(c))
+        type = char.ToLower(c) switch
         {
-            case 'k':
-                type = Type.King;
-                break;
-            case 'q':
-                type = Type.Queen;
-                break;
-            case 'r':
-                type = Type.Rook;
-                break;
-            case 'b':
-                type = Type.Bishop;
-                break;
-            case 'n':
-                type = Type.Knight;
-                break;
-            case 'p':
-                type = Type.Pawn;
-                break;
-            default:
-                type = Type.King;
-                break;
-        }
+            'k' => Type.King,
+            'q' => Type.Queen,
+            'r' => Type.Rook,
+            'b' => Type.Bishop,
+            'n' => Type.Knight,
+            'p' => Type.Pawn,
+            _ => Type.King,
+        };
     }
 }
