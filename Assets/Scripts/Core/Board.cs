@@ -22,17 +22,25 @@ public class Board
 
     public bool MovePiece(Piece piece, Move move)
     {
-        Piece captured = GetPiece(move.end);
-        if (piece.color == captured.color)
+        if (!Utils.IsPosOnBoard(move.end))
+        {
+            piece.setPos(move.start);
             return false;
+        }
+        Piece captured = GetPiece(move.end);
+        if (piece.color == captured.color && captured.hasPiece)
+        {
+            piece.setPos(move.start);
+            return false;
+        }
 
         //unity instance handling
         captured.destroyPiece(instantiater);
         piece.movePiece(move);
 
         //modifying array
-        pieces[move.start.x, move.start.y] = new Piece(move.start);
-        pieces[move.end.x, move.end.y] = piece;
+        SetPiece(move.start, new Piece(move.start));
+        SetPiece(move.end, piece);
 
 
         return true;
@@ -41,5 +49,11 @@ public class Board
     public Piece GetPiece(Vector2Int location)
     {
         return pieces[location.x, location.y];
+    }
+
+    public bool SetPiece(Vector2Int location, Piece piece)
+    {
+        pieces[location.x, location.y] = piece;
+        return true;
     }
 }

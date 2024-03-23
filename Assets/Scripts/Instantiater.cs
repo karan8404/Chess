@@ -33,6 +33,6 @@ public class Instantiater : MonoBehaviour
 
     public Vector3 V2IntTov3(Vector2Int v2)
     {
-        return (ChessBoard.transform.position + new Vector3(v2.x, v2.y, 0));
+        return ChessBoard.transform.position + new Vector3(v2.x, v2.y, 0);
     }
 }
