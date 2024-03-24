@@ -32,7 +32,7 @@ public static class FenUtility
             {
                 Type type;
                 Color color;
-                charPiece(c, out type, out color);
+                CharPiece(c, out type, out color);
 
                 board.pieces[column, row] = new Piece(Utils.V2int(column, row), type, color, instantiater);
                 column++;
@@ -46,7 +46,7 @@ public static class FenUtility
 
     }
 
-    public static void charPiece(char c, out Type type, out Color color)
+    public static void CharPiece(char c, out Type type, out Color color)
     {
         if (char.IsUpper(c))
             color = Color.White;

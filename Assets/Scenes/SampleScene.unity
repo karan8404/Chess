@@ -367,6 +367,7 @@ MonoBehaviour:
   - {fileID: 5672367232211412878, guid: 37234cbfd47142247add90d00156231e, type: 3}
   - {fileID: 4850696401136752600, guid: 07cafc4278600f9479dd243adfe17101, type: 3}
   moveIndicatorPrefab: {fileID: 8478749867579244240, guid: d10708ade73f1814e94d7c14d6be76ff, type: 3}
+  moveIndicatorParent: {fileID: 1817861470}
 --- !u!4 &1231655814
 Transform:
   m_ObjectHideFlags: 0

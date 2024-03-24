@@ -27,18 +27,19 @@ public class DragPiece : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Utils.IsPosOnBoard(arrayPos))
         {
             pickedPiece = game.board.GetPiece(arrayPos);
+            originalPos = arrayPos;
             if (!pickedPiece.hasPiece)
             {
-                pickedPiece = getDummyPiece();
+                pickedPiece = GetDummyPiece();
+                return;
             }
 
-            originalPos = arrayPos;
-            Debug.Log(pickedPiece.color + " " + pickedPiece.type + "  " + pickedPiece.location );
+            game.board.PickPiece(pickedPiece, originalPos);
         }
 
         if (Input.GetMouseButton(0))
         {
-            pickedPiece.instance.transform.position=mousePos+Vector3.forward;
+            pickedPiece.instance.transform.position = mousePos + Vector3.forward;
         }
 
         //to drop a piece.
@@ -46,17 +47,16 @@ public class DragPiece : MonoBehaviour
         {
             if (pickedPiece == dummy)
             {
-                pickedPiece.setPos(Utils.V2int(-5, -5));
+                pickedPiece.SetPos(Utils.V2int(-5, -5));
                 return;
             }
             Move move = new(originalPos, arrayPos, pickedPiece);
-            Debug.Log(originalPos + " " + arrayPos);
 
-            game.board.MovePiece(pickedPiece, move);
+            game.board.MovePiece(move);
         }
     }
 
-    private Piece getDummyPiece()
+    private Piece GetDummyPiece()
     {
         dummy = new Piece(Utils.V2int(-5, -5))
         {

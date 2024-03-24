@@ -13,7 +13,7 @@ public class Square
         instance = instantiater.CreateSquare(this);
     }
 
-    public void destroySquare(Instantiater instantiater)
+    public void DestroySquare(Instantiater instantiater)
     {
         instantiater.DestroySquare(this);
     }

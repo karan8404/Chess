@@ -20,30 +20,32 @@ public class Board
         FenUtility.CreateBoard(FenUtility.startingPosition, this, instantiater);
     }
 
-    public bool MovePiece(Piece piece, Move move)
+    public void PickPiece(Piece piece, Vector2Int originalPos)
     {
-        if (!Utils.IsPosOnBoard(move.end))
+        MoveGuide.GenerateMoves(ref pieces, piece, originalPos, instantiater);
+    }
+
+    public void MovePiece(Move move)
+    {
+        if (Utils.IsPosOnBoard(move.end) &&MoveGuide.IsLegal(move))
         {
-            piece.setPos(move.start);
-            return false;
+            Piece captured = GetPiece(move.end);
+            //set original position to not have a piece
+            //for final position, destroy instance, set piece position to it and modify it to have a piece. 
+            captured.DestroyPiece(instantiater);
+            move.piece.MovePiece(move);
+
+            //modifying array
+            SetPiece(move.start, new Piece(move.start));
+            SetPiece(move.end, move.piece);
+            Debug.Log("Placed");
         }
-        Piece captured = GetPiece(move.end);
-        if (piece.color == captured.color && captured.hasPiece)
+        else
         {
-            piece.setPos(move.start);
-            return false;
+            move.piece.SetPos(move.start);
+            Debug.Log("failed");
         }
-
-        //unity instance handling
-        captured.destroyPiece(instantiater);
-        piece.movePiece(move);
-
-        //modifying array
-        SetPiece(move.start, new Piece(move.start));
-        SetPiece(move.end, piece);
-
-
-        return true;
+        instantiater.RemoveMoves();
     }
 
     public Piece GetPiece(Vector2Int location)
@@ -51,9 +53,8 @@ public class Board
         return pieces[location.x, location.y];
     }
 
-    public bool SetPiece(Vector2Int location, Piece piece)
+    public void SetPiece(Vector2Int location, Piece piece)
     {
         pieces[location.x, location.y] = piece;
-        return true;
     }
 }
